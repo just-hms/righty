@@ -18,8 +18,9 @@ jobs:
           mkdir -p release
           zip -r release/release.zip script README.md
 
-      - name: Upload release artifact
-        uses: actions/upload-artifact@v4
+      - name: Copy build-artifacts
+        uses: skx/github-action-publish-binaries@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: scripts
-          path: release/release.zip
+          args: "./release/release.zip"
