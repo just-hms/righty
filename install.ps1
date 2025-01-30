@@ -1,7 +1,7 @@
 # Define paths
 $zipPath = "$env:TEMP\righty.zip"
 $installPath = "$env:ProgramFiles\righty"
-$scriptsPath = "$env:ProgramFiles\righty\scripts"
+$scriptsPath = "$installPath\scripts"
 $configFile = "$installPath\config.json"
 
 Invoke-WebRequest -Uri "https://github.com/just-hms/righty/releases/latest/download/righty.zip" -OutFile $zipPath
