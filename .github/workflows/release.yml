@@ -16,11 +16,11 @@ jobs:
       - name: Create zip archive
         run: |
           mkdir -p release
-          zip -r release/scripts.zip scripts README.md
+          zip -r release/righty.zip scripts README.md config.json
 
       - name: Copy build-artifacts
         uses: skx/github-action-publish-binaries@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          args: "./release/scripts.zip"
+          args: "./release/righty.zip"
