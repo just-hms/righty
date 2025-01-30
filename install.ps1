@@ -26,7 +26,7 @@ foreach ($scriptCfg in $cfg) {
 
     # Find the script file
     $scriptPath = Join-Path $scriptsPath $name
-    $scriptPath = $scriptPath -replace "\\", "\\\\"
+    $scriptPath = $scriptPath -replace "\", "\\"
 
     if (-not (Test-Path $scriptPath)) {
         Write-Warning "Script '$name' not found at '$scriptPath'. Skipping context menu entry."
