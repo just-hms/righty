@@ -1,7 +1,8 @@
 # Define paths
 $zipPath = "$env:TEMP\righty.zip"
-$installPath = "$env:ProgramFiles\righty"  # Specify your installation directory
-$configFile = "$installPath\config.json"  # Path to the JSON config file
+$installPath = "$env:ProgramFiles\righty"
+$scriptsPath = "$env:ProgramFiles\scripts"
+$configFile = "$installPath\config.json"
 
 Invoke-WebRequest -Uri "https://github.com/just-hms/righty/releases/latest/download/righty.zip" -OutFile $zipPath
 
@@ -20,7 +21,7 @@ foreach ($scriptCfg in $cfg) {
     $title = $scriptCfg.title
 
     # Find the script file
-    $scriptPath = Join-Path $installPath $name
+    $scriptPath = Join-Path $scriptsPath $name
     if (-not (Test-Path $scriptPath)) {
         Write-Warning "Script '$name' not found at '$scriptPath'. Skipping context menu entry."
         continue
