@@ -1,0 +1,7 @@
+[
+  {
+    "name": "external.ps1",
+    "files": [".dwg"],
+    "title": "Extract external references"
+  }
+]

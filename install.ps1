@@ -1,7 +1,7 @@
 # Define paths
 $zipPath = "$env:TEMP\scripts.zip"
 $installPath = "$env:ProgramFiles\righty"  # Specify your installation directory
-$configFile = "$installPath\config.ini"  # Path to the .ini config file
+$configFile = "$installPath\config.json"  # Path to the JSON config file
 
 Write-Host "Downloading release archive..."
 Invoke-WebRequest -Uri "https://github.com/just-hms/righty/releases/latest/download/scripts.zip" -OutFile $zipPath
@@ -14,49 +14,26 @@ Expand-Archive -Path $zipPath -DestinationPath $installPath -Force
 
 Write-Host "Reading configuration file..."
 
-# Load .NET ConfigurationManager to read INI
-Add-Type -AssemblyName System.Configuration
-
-function LoadINI {
-    param(
-        [string]$path
-    )
-    $iniConfig = @{}
-    $ini = [System.Configuration.ConfigurationManager]::OpenMappedExeConfiguration(
-        (New-Object System.Configuration.ExeConfigurationFileMap), [System.Configuration.ConfigurationUserLevel]::None)
-    $iniFile = $ini.GetSection("settings")
-
-    foreach ($section in $iniFile) {
-        $sectionName = $section.SectionInformation.Name
-        $iniConfig[$sectionName] = @{}
-
-        foreach ($key in $section.ElementInformation.Properties) {
-            $iniConfig[$sectionName][$key.Name] = $key.Value
-        }
-    }
-    return $iniConfig
-}
-
-# Parse INI configuration
-$iniConfig = LoadINI -path $configFile
+# Load JSON configuration
+$configContent = Get-Content -Path $configFile -Raw
+$cfg = $configContent | ConvertFrom-Json
 
 Write-Host "Creating context menu entries for each script..."
 
-# Process each script based on the config
-foreach ($section in $iniConfig.Keys) {
-    $name = $iniConfig[$section]["name"]
-    $files = $iniConfig[$section]["files"]
-    $title = $iniConfig[$section]["title"]
+# Process each script based on the JSON config
+foreach ($scriptCfg in $cfg) {
+    $name = $scriptCfg.name
+    $files = $scriptCfg.files
+    $title = $scriptCfg.title
 
     # Split the file extensions by comma and trim spaces
-    $extensions = $files.Split(',') | ForEach-Object { $_.Trim() }
+    $extensions = $files | ForEach-Object { $_.Trim() }
 
     Write-Host "----"
     Write-Host $name
     Write-Host $files
-    Write-Host $titles
+    Write-Host $title
     Write-Host "----"
-
     continue
 
     # Find the script file
