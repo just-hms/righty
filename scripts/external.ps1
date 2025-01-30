@@ -27,14 +27,13 @@ if ($null -eq $DraftSightApp){
     exit 1
 }
 
-
 try {
     $doc = $DraftSightApp.OpenDocument($path, 1)
     $xrefs = $doc.GetExternalReferences()
 
     $clip = ""
     foreach ($xref in $xrefs) {
-        $clip += $xref.Name() + [System.Environment]::NewLine
+        $clip += $xref.Name() + "`r`n"
     }
 
     if (-not $clip) {

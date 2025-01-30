@@ -13,5 +13,10 @@ irm -Uri https://raw.githubusercontent.com/just-hms/righty/main/install.ps1 | ie
 ## uninstall
 
 ```powershell
+# todo: this currently doesn't work
 $env:ProgramFiles\righty\uninstall
 ```
+
+## sources
+
+- https://gist.github.com/KyleMit/978086ae267ff5be17811e99c9607986
