@@ -26,6 +26,8 @@ foreach ($scriptCfg in $cfg) {
 
     # Find the script file
     $scriptPath = Join-Path $scriptsPath $name
+    $scriptPath = $scriptPath -replace "\\", "\\\\"
+
     if (-not (Test-Path $scriptPath)) {
         Write-Warning "Script '$name' not found at '$scriptPath'. Skipping context menu entry."
         continue
@@ -38,7 +40,7 @@ foreach ($scriptCfg in $cfg) {
         $regContent += "[$extKey]`r`n"
         $regContent += "@=`"$title`"`r`n`r`n"
         $regContent += "[$commandKey]`r`n"
-        $regContent += "@=`"powershell -ExecutionPolicy Bypass -File \`"$scriptPath\`" \`"%1\`"`"`r`n"
+        $regContent += "@=`"powershell.exe -ExecutionPolicy Bypass -File \`"$scriptPath\`" \`"%1\`"`"`r`n"
     }
 }
 
