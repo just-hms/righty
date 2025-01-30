@@ -1,7 +1,7 @@
 # Define paths
 $zipPath = "$env:TEMP\scripts.zip"
 $installPath = "$env:ProgramFiles\righty"  # Specify your installation directory
-$configFile = "$installPath\config.json"  # Path to the JSON config file
+$configFile = "$installPath\scripts\config.json"  # Path to the JSON config file
 
 Write-Host "Downloading release archive..."
 Invoke-WebRequest -Uri "https://github.com/just-hms/righty/releases/latest/download/scripts.zip" -OutFile $zipPath
