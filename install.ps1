@@ -35,10 +35,10 @@ foreach ($scriptCfg in $cfg) {
         $extKey="HKEY_CLASSES_ROOT\$ext\shell\$title"
         $commandKey = "$extKey\command"
         
-        $regContent += "[]`r`n"
+        $regContent += "[$extKey]`r`n"
         $regContent += "@=`"$title`"`r`n`r`n"
         $regContent += "[$commandKey]`r`n"
-        $regContent += "@=`"powershell -ExecutionPolicy Bypass -File `"$scriptPath`" `"%1`"`r`n"
+        $regContent += "@=`"powershell -ExecutionPolicy Bypass -File \`"$scriptPath\`" \`"%1\`"`"`r`n"
     }
 }
 
