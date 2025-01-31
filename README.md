@@ -5,16 +5,8 @@ a set of powershell scripts which will be added automatically to your windows co
 
 ## install
 
-
 ```powershell
 irm -Uri https://raw.githubusercontent.com/just-hms/righty/refs/heads/main/install.ps1 | iex
-```
-
-## uninstall
-
-```powershell
-# todo: this currently doesn't work
-$env:ProgramFiles\righty\uninstall
 ```
 
 ## sources
