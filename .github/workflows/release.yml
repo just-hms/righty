@@ -16,7 +16,8 @@ jobs:
       - name: Create zip archive
         run: |
           mkdir -p release
-          zip -r release/righty.zip scripts/* README.md
+          (cd scripts && zip -r ../release/righty.zip .)
+          zip -r release/righty.zip README.md
 
       - name: Copy build-artifacts
         uses: skx/github-action-publish-binaries@master

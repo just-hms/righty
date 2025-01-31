@@ -1,6 +1,6 @@
 # Define paths
 $zipPath = "$env:TEMP\righty.zip"
-$installPath = "$env:ProgramFiles\righty"
+$installPath = "$env:ProgramFiles\Righty"
 
 if (Test-Path $installPath) {
     Remove-Item -Path $installPath -Recurse -Force
