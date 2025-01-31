@@ -16,7 +16,7 @@ jobs:
       - name: Create zip archive
         run: |
           mkdir -p release
-          zip -r release/righty.zip scripts README.md config.json uninstall.ps1
+          zip -r release/righty.zip scripts/* README.md
 
       - name: Copy build-artifacts
         uses: skx/github-action-publish-binaries@master
