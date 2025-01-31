@@ -15,17 +15,21 @@ if (-not (Test-Path $path)) {
 }
 
 if ([System.IO.Path]::GetExtension($path) -ne ".dwg") {
-    Write-Host "Error: File is not a .dwg file."
+    Write-Host "Error: The file is not a .dwg file."
     exit 1
 }
+
+Write-Host "Opening DraftSight... This may take a moment."
 
 $DraftSightApp = New-Object -ComObject "DraftSight.Application"
 $DraftSightApp.Visible = $false
 
-if ($null -eq $DraftSightApp){
-    Write-Host "Error attaching to DraftSight"
+if ($null -eq $DraftSightApp) {
+    Write-Host "Error: Unable to attach to DraftSight."
     exit 1
 }
+
+Write-Host "Opening the document..."
 
 try {
     $doc = $DraftSightApp.OpenDocument($path, 1)
@@ -34,11 +38,6 @@ try {
     $clip = ""
     foreach ($xref in $xrefs) {
         $clip += $xref.Name() + "`r`n"
-    }
-
-    if (-not $clip) {
-        Write-Host "No external references found."
-        exit 1
     }
 
     Set-Clipboard -Value $clip
