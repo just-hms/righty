@@ -1,7 +1,0 @@
-Windows Registry Editor Version 5.00
-
-[HKEY_CLASSES_ROOT\*\shell\Open with Custom Script]
-@="Run Script"
-
-[HKEY_CLASSES_ROOT\*\shell\Open with Custom Script\command]
-@="powershell.exe -ExecutionPolicy Bypass -File \"C:\\Path\to\script.ps1\" \"%1\""
