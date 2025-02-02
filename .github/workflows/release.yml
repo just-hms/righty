@@ -16,6 +16,7 @@ jobs:
       - name: Create zip archive
         run: |
           mkdir -p release
+          ls -1 ./scripts/*.ps1 | sed 's/\.ps1$/.bat/' | xargs -I{} cp base.bat {}
           (cd scripts && zip -r ../release/righty.zip .)
           zip -r release/righty.zip README.md
 
